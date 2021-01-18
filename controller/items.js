@@ -36,7 +36,8 @@ module.exports.addItem = async function(req, res) {
             sys_name : sysName,
             name : req.body.name,
             price : (req.body.price) ? req.body.price : 0,
-            stock_count: (req.body.stock_count) ? req.body.stock_count : 0
+            stock_count: (req.body.stock_count) ? req.body.stock_count : 0,
+            sku: (req.body.sku) ? req.body.sku : '0'
         })
         await item.save( (err, item) => {
             if(err) {
@@ -65,7 +66,8 @@ module.exports.updateItem = async function(req, res) {
                 sys_name : sysName,
                 name : req.body.name,
                 price : (req.body.price) ? req.body.price : 0,
-                stock_count: (req.body.stock_count) ? req.body.stock_count : 0
+                stock_count: (req.body.stock_count) ? req.body.stock_count : 0,
+                sku: (req.body.sku) ? req.body.sku : '0'
             },
             {new : true}
             )

@@ -1,7 +1,7 @@
 const Orders = require('../model/Orders')
 
 module.exports.getList = async function(req, res) {
-    const data = await Orders.find({})
+    const data = await Orders.find({}).sort({date: 'desc'})
 
     if(data && data.length > 0) {
         res.json(data)
@@ -48,18 +48,21 @@ module.exports.addOrder = async function(req, res) {
 
 module.exports.updateOrder = async function(req, res) {
     try {
-        const order = await Orders.findOneAndUpdate({
-            _id : req.params.id,
-            items : null,
-            processed_by: null,
-            status: req.query.status,
-            client_name: req.query.client_name,
-            client_city: req.query.client_city,
-            client_phone: req.query.client_phone,
-            client_paytype: req.query.client_paytype,
-            client_delivery: req.query.client_delivery,
-            client_comment: req.query.client_comment
-        })
+        const order = await Orders.findOneAndUpdate(
+            {_id : req.params.id},
+            {
+                items : req.body.items,
+                processed_by: null,
+                status: req.body.status,
+                client_name: req.body.client_name,
+                client_city: req.body.client_city,
+                client_phone: req.body.client_phone,
+                client_paytype: req.body.client_paytype,
+                client_delivery: req.body.client_delivery,
+                client_comment: req.body.client_comment
+            },
+            {new: true}
+        )
         res.json({ message : `Order ${order._id} updated` })
     } catch(e) {
         console.error(e)

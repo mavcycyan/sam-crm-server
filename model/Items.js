@@ -17,6 +17,9 @@ const itemsSchema = new Schema({
     stock_count: {
         type : Number,
         default : 0
+    },
+    sku: {
+        type: String
     }
 })
 

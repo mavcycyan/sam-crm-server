@@ -27,6 +27,7 @@ mongoose.connect(keys.db_uri, {
 app.use(require('morgan')('dev'))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
+app.use(require('cors')())
 
 app.use('/api/auth', AuthRoute)
 app.use('/api/list', ItemsRoute)
