@@ -1,7 +1,14 @@
 const Orders = require('../model/Orders')
 
+module.exports.countOrders = async function(req, res) {
+    const ordersCount = await Orders.find({}).countDocuments();
+    res.json(ordersCount)
+}
+
 module.exports.getList = async function(req, res) {
-    const data = await Orders.find({}).sort({date: 'desc'})
+    const limit = parseInt(req.query.limit);
+    const skipList = (req.query.page) ? (req.query.page - 1) * limit : 0;
+    const data = await Orders.find({}).sort({date: 'desc'}).skip(skipList).limit(limit)
 
     if(data && data.length > 0) {
         res.json(data)
