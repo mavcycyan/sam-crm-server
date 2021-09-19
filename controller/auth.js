@@ -9,7 +9,7 @@ module.exports.login = async function(req, res) {
     if(data) {
         const passwordResult = bcrypt.compareSync(req.body.password, data.password)
         if(passwordResult) {
-            res.json({ message : 'Logged in!' })
+            res.json({ message : 'Logged in!', name: data.name })
         } else {
             res.status(401).json({ message: 'Password incorrect!' })
         }
