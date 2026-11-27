@@ -1,8 +1,9 @@
-const db_name = 'samcrm'
-const db_user = 'samroot'
-const db_password = process.env.DB_PASSWORD
+const db_uri = process.env.DB_URI
 
+if (!db_uri) {
+    throw new Error('DB_URI is not set. Copy .env.example to .env and fill it in.')
+}
 
 module.exports = {
-    db_uri : `mongodb+srv://${db_user}:${db_password}@cluster0.3gsa4.mongodb.net/${db_name}?retryWrites=true&w=majority`
+    db_uri
 }

@@ -4,8 +4,9 @@
   "description": "Server for angular-based crm",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index"
+    "start": "node --env-file=.env index.js",
+    "dev": "nodemon --exec \"node --env-file=.env\" index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Samoylenko Viktor",
   "license": "ISC",
